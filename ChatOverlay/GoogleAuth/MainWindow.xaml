@@ -1,0 +1,22 @@
+﻿<Window x:Class="GoogleAuth.MainWindow"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          Title="MainWindow" Height="750" Width="525">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="btv" />
+    </Window.Resources>
+    <Grid>
+        <DockPanel Visibility="{Binding State.IsSigned, Converter={StaticResource btv}}">
+            <Label>You are signed as:</Label>
+            <Label Content="{Binding State.Token.Name}" />
+        </DockPanel>
+        <Grid Visibility="{Binding State.IsNotSigned, Converter={StaticResource btv}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button Click="Button_Click">Click to Sign In</Button>
+            <WebBrowser Grid.Row="1" x:Name="Wb" Height="Auto" />
+        </Grid>
+    </Grid>
+</Window>
